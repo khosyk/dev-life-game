@@ -5,7 +5,7 @@ import { gameData } from "@/lib/gameData";
 export async function POST(request: Request) {
   const { choiceKey } = await request.json();
   console.log("API /api/game/choose: 선택 키 수신 -", choiceKey);
-  let gameState = loadGame();
+  const gameState = loadGame();
 
   if (!gameState) {
     console.log("API /api/game/choose: 게임 상태를 찾을 수 없습니다.");
