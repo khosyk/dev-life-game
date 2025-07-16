@@ -1,26 +1,166 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.game-container {
+  background-color: #282c34;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  color: #abb2bf;
+  display: flex;
+  flex-direction: column;
+  min-height: 600px; /* 최소 높이 설정 */
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.game-header h1 {
+  color: #61dafb;
+  font-size: 2.5em;
+  margin: 0;
+}
+
+.game-actions-top-right {
+  display: flex;
+  gap: 10px;
+}
+
+.game-actions-top-right button {
+  background-color: #4b5263;
+  color: #abb2bf;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+}
+
+.game-actions-top-right button:hover {
+  background-color: #636d83;
+}
+
+.game-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding: 10px 0;
+  border-top: 1px solid #3e4451;
+  border-bottom: 1px solid #3e4451;
+}
+
+.game-stats div {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.game-story {
+  margin-bottom: 30px;
+  font-size: 1.2em;
+  line-height: 1.6;
+  min-height: 200px; /* 스토리 영역 최소 높이 증가 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1; /* 남은 공간을 채우도록 설정 */
+}
+
+.game-story img {
+  max-width: 100%;
+  height: auto;
+  max-height: 250px; /* 이미지 최대 높이 설정 */
+  object-fit: contain;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.game-choices {
+  margin-top: auto; /* 선택지를 하단에 배치 */
+}
+
+.game-choices button {
+  background-color: #61dafb;
+  color: #282c34;
+  border: none;
+  padding: 12px 25px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease;
+  width: calc(50% - 20px);
+  box-sizing: border-box;
+}
+
+.game-choices button:hover {
+  background-color: #21a1f1;
+}
+
+.game-actions button {
+  background-color: #4b5263;
+  color: #abb2bf;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.game-actions button:hover {
+  background-color: #636d83;
+}
+
+.game-message {
+  margin-top: 20px;
+  font-size: 1.1em;
+  color: #e06c75;
+}
+
+.game-complete-message {
+  color: #98c379;
 }
