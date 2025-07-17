@@ -5,7 +5,7 @@ import { gameData } from "@/lib/gameData";
 export async function POST(request: Request) {
   const { choiceKey } = await request.json();
   console.log("API /api/game/choose: 선택 키 수신 -", choiceKey);
-  const gameState = loadGame();
+  const gameState = await loadGame();
 
   if (!gameState) {
     console.log("API /api/game/choose: 게임 상태를 찾을 수 없습니다.");
@@ -29,17 +29,17 @@ export async function POST(request: Request) {
     } else if (result.badEndingType === "senior_unsuccessful") {
       badEndingText = gameData.bad_ending.senior_unsuccessful_text;
     }
-    saveGame(newGameState!); // 배드 엔딩 상태 저장
+    await saveGame(newGameState!); // 배드 엔딩 상태 저장
     return NextResponse.json({ success: true, gameState: newGameState, isBadEnding: true, badEndingText: badEndingText });
   }
 
   if (result.isGameComplete) {
-    saveGame(newGameState!); // 게임 완료 상태 저장
+    await saveGame(newGameState!); // 게임 완료 상태 저장
     return NextResponse.json({ success: true, gameState: newGameState, isGameComplete: true, message: result.message || gameData.happy_ending_text });
   }
 
   if (newGameState) {
-    saveGame(newGameState);
+    await saveGame(newGameState);
     return NextResponse.json({ success: true, gameState: newGameState });
   } else {
     return NextResponse.json({ success: false, message: result.message || "선택 처리 중 오류가 발생했습니다." }, { status: 400 });
